@@ -65,6 +65,7 @@ const bootComplete = computed(() => visibleCount.value >= bootLines.value.length
   background: #070f07;
   padding: 28px 32px 32px;
   font-family: 'Courier New', Courier, monospace;
+  height: 300px;
 }
 
 /* subtle scanline overlay */

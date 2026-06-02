@@ -27,16 +27,17 @@ function guess(letter: string) {
 </script>
 
 <template>
-  <div>
-    <p>🖥️ Het jaar is 1983. Raad het geheime woord!</p>
-    <p>Foute gokken: {{ wrongGuesses }} / {{ maxWrong }}</p>
+  <div class="wordguess">
+    <p class="intro">🖥️ Het jaar is 1983. Raad het geheime woord!</p>
+    <p class="counter">Foute gokken: <span :class="{ danger: wrongGuesses >= maxWrong - 1 }">{{ wrongGuesses }}</span> / {{ maxWrong }}</p>
 
     <p class="word">{{ displayWord }}</p>
 
-    <div v-if="!won && !lost">
+    <div v-if="!won && !lost" class="keyboard">
       <button
         v-for="letter in letters"
         :key="letter"
+        class="key"
         @click="guess(letter)"
         :disabled="guessed.includes(letter)"
       >
@@ -44,10 +45,96 @@ function guess(letter: string) {
       </button>
     </div>
 
-    <p v-if="won">🎉 Gewonnen! Het woord was {{ word }}!</p>
-    <p v-if="lost">💀 Verbinding verbroken... Het woord was {{ word }}.</p>
+    <p v-if="won" class="result win">🎉 Gewonnen! Het woord was {{ word }}!</p>
+    <p v-if="lost" class="result lose">💀 Verbinding verbroken... Het woord was {{ word }}.</p>
   </div>
 </template>
 
 
-<style></style>
+<style scoped>
+.wordguess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  color: #c8ffc8;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.intro {
+  color: #3dff3d;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.counter {
+  color: #7fff7f;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.counter .danger {
+  color: #ff5555;
+}
+
+.word {
+  font-size: 2.5rem;
+  letter-spacing: 0.5em;
+  color: #3dff3d;
+  text-shadow: 0 0 12px #3dff3d88;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 420px;
+  margin-bottom: 1.5rem;
+}
+
+.key {
+  background: linear-gradient(135deg, #1a3d1a, #0d2a0d);
+  border: 1px solid #3a8a3a;
+  color: #7fff7f;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  min-width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.key:hover:not(:disabled) {
+  border-color: #5dff5d;
+  color: #3dff3d;
+  box-shadow: 0 0 10px #3dff3d66;
+}
+
+.key:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.result {
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
+}
+
+.win {
+  color: #3dff3d;
+  text-shadow: 0 0 10px #3dff3d88;
+}
+
+.lose {
+  color: #ff5555;
+  text-shadow: 0 0 10px #ff555588;
+}
+</style>

@@ -28,7 +28,7 @@ function handleLogin() {
       />
     </div>
     <button class="connect-btn" @click="handleLogin" :disabled="operatorName.trim() === ''">
-      <span class="btn-icon">⚡</span> Maak verbinding
+      <span class="btn-icon"></span> Maak verbinding
     </button>
   </div>
 </template>
