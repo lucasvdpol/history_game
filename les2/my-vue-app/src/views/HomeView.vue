@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { timelineItems } from '@/data/timelineItems.js';
 import SystemBoot from '../components/home/SystemBoot.vue'
 </script>
 
@@ -15,35 +16,7 @@ import SystemBoot from '../components/home/SystemBoot.vue'
         </p>
       </div>
 
-      <div class="fact-grid">
-        <div class="fact-card">
-          <div class="fact-icon">💾</div>
-          <div class="fact-year">1983</div>
-          <div class="fact-label">Eerste thuis-computers</div>
-          <p class="fact-desc">Computers waren zo groot als een koffer en hadden minder geheugen dan één foto op je telefoon.</p>
-        </div>
-        <div class="fact-card">
-          <div class="fact-icon">📞</div>
-          <div class="fact-year">1991</div>
-          <div class="fact-label">Eerste mobiele telefoon</div>
-          <p class="fact-desc">De eerste mobieltjes wogen bijna een kilo en je kon er alleen mee bellen — geen apps!</p>
-        </div>
-        <div class="fact-card">
-          <div class="fact-icon">🌐</div>
-          <div class="fact-year">1993</div>
-          <div class="fact-label">Het internet voor iedereen</div>
-          <p class="fact-desc">Voor het eerst konden gewone mensen thuis internetten. Een pagina laden duurde soms minuten.</p>
-        </div>
-        <div class="fact-card">
-          <div class="fact-icon">📱</div>
-          <div class="fact-year">2007</div>
-          <div class="fact-label">De eerste iPhone</div>
-          <p class="fact-desc">Steve Jobs liet de wereld de eerste echt slimme telefoon zien. Alles veranderde voor altijd.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="terminal-section">
+      <section class="terminal-section">
       <div class="terminal-wrapper">
         <div class="terminal-topbar">
           <span class="dot red"></span>
@@ -54,6 +27,19 @@ import SystemBoot from '../components/home/SystemBoot.vue'
         <SystemBoot />
       </div>
     </section>
+
+      <div class="fact-grid">
+        <div class="fact-card" v-for="item in timelineItems">
+          <div class="fact-icon">{{ item.emoji }}</div>
+          <div class="fact-year">{{ item.year }}</div>
+          <div class="fact-label">{{ item.title }}</div>
+          <p class="fact-desc">{{ item.description }}</p>
+        </div>
+       
+      </div>
+    </section>
+
+    
   </main>
 </template>
 
@@ -119,8 +105,27 @@ import SystemBoot from '../components/home/SystemBoot.vue'
 /* ── Fact grid ── */
 .fact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: 1fr;
   gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .fact-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .fact-card {
+    grid-column: span 2;
+  }
+
+  /* Center de laatste 2 items in de onderste rij */
+  .fact-card:nth-child(4) {
+    grid-column: 2 / 4;
+  }
+
+  .fact-card:nth-child(5) {
+    grid-column: 4 / 6;
+  }
 }
 
 .fact-card {
@@ -131,6 +136,7 @@ import SystemBoot from '../components/home/SystemBoot.vue'
   text-align: center;
   transition: border-color 0.2s, transform 0.2s;
   cursor: default;
+  height: 280px
 }
 
 .fact-card:hover {
