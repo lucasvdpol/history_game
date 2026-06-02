@@ -54,7 +54,7 @@ function goToNextTimelineItem(){
 
     <p v-if="won" class="result win">🎉 Gewonnen! Het woord was {{ word }}!</p>
     <p v-if="lost" class="result lose">💀 Verbinding verbroken... Het woord was {{ word }}.</p>
-    <button @click="goToNextTimelineItem" class="continue-button" v-if="won || lost">Doorgaan</button>
+    <button @click="goToNextTimelineItem" class="continue-button" v-if="won || lost">Doorgaan →</button>
   </div>
 </template>
 
@@ -89,16 +89,16 @@ function goToNextTimelineItem(){
   border: 1px solid #3a8a3a;
   color: #7fff7f;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 24px;
-  padding: 1rem 2rem;
+  font-size: 1rem;
+  padding: 12px 32px;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s ease;
-  margin-top: 1.5rem; 
-
+  margin-top: 1.5rem;
+  letter-spacing: 0.08em;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
 }
 
 
