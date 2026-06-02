@@ -5,6 +5,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import WordGuess from '@/components/1983/WordGuess.vue'
 import { timelineItems } from '@/data/timelineItems'
+import URLBuilder from '@/components/1991/URLBuilder.vue'
 const route = useRoute()
 
 const currentYear = computed(() => route.params.id)
@@ -24,6 +25,7 @@ const currentItem = computed(() => timelineItems.find(item => item.id === curren
     </div>
 
     <WordGuess v-if="currentYear === '1983'" />
+    <URLBuilder v-if="currentYear === '1991'" />
   </main>
 </template>
 
