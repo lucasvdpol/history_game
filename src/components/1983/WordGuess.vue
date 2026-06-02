@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter();
 const word = 'PACMAN'
 const guessed = ref<string[]>([])
 const maxWrong = 5
@@ -20,6 +23,10 @@ function guess(letter: string) {
   if (!guessed.value.includes(letter)) {
     guessed.value.push(letter)
   }
+}
+
+function goToNextTimelineItem(){
+  router.push("/timeline/1991")
 }
 
 
@@ -47,6 +54,7 @@ function guess(letter: string) {
 
     <p v-if="won" class="result win">🎉 Gewonnen! Het woord was {{ word }}!</p>
     <p v-if="lost" class="result lose">💀 Verbinding verbroken... Het woord was {{ word }}.</p>
+    <button @click="goToNextTimelineItem" class="continue-button" v-if="won || lost">Doorgaan</button>
   </div>
 </template>
 
@@ -75,6 +83,24 @@ function guess(letter: string) {
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
 }
+
+.continue-button {
+  background: linear-gradient(135deg, #1a3d1a, #0d2a0d);
+  border: 1px solid #3a8a3a;
+  color: #7fff7f;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 24px;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: 1.5rem; 
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .counter .danger {
   color: #ff5555;
