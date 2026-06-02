@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TimelineNav from './views/TimelineNav.vue'
-import { useAuth } from './composables/useAuth'
+import { useAuth } from './composables/useAuth.ts'
 
 const { isLoggedIn } = useAuth()
 </script>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuth } from '../../composables/useAuth'
+import { useAuth } from '../../composables/useAuth.ts'
 import AccessForm from './AccessForm.vue'
 
 const router = useRouter()

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TimelineView from '../views/TimelineView.vue'
-import { useAuth } from '../composables/useAuth'
+import { useAuth } from '../composables/useAuth.ts'
 
 const routes = [
   {
