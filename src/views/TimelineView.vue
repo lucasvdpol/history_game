@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MissionLog from '@/components/MissionLog.vue'
 import ArpanetPuzzle from '@/components/1983/ArpanetPuzzle.vue'
+import WAP from '@/components/1999/WAP.vue'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import WordGuess from '@/components/1983/WordGuess.vue'
@@ -26,6 +27,7 @@ const currentItem = computed(() => timelineItems.find(item => item.id === curren
 
     <WordGuess v-if="currentYear === '1983'" />
     <URLBuilder v-if="currentYear === '1991'" />
+    <WAP v-if="currentYear === '1999'"/>
   </main>
 </template>
 
