@@ -158,18 +158,34 @@ function goToNextTimelineItem(){
 }
 
 .result {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   letter-spacing: 0.05em;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  line-height: 1.65;
+  padding: 16px 20px;
+  border-radius: 6px;
+  border: 1px solid;
+  border-left: 3px solid;
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
 }
 
 .win {
   color: #3dff3d;
   text-shadow: 0 0 10px #3dff3d88;
+  border-color: #2a5a2a;
+  border-left-color: #3dff3d;
+  background: #050d05;
+  box-shadow: 0 0 20px #3dff3d0d;
 }
 
 .lose {
-  color: #ff5555;
-  text-shadow: 0 0 10px #ff555588;
+  color: #ff7070;
+  text-shadow: 0 0 10px #ff555566;
+  border-color: #5a2a2a;
+  border-left-color: #ff5555;
+  background: #0d0505;
+  box-shadow: 0 0 20px #ff55550d;
 }
 </style>
