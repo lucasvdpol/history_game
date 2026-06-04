@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { usePuzzleStore } from '@/stores/puzzle';
+import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter();
+const puzzleStore = usePuzzleStore();
+
+const isCompleted = puzzleStore.completedPuzzles.includes("1983")
+
 const word = 'PACMAN'
 const guessed = ref<string[]>([])
 const maxWrong = 5
@@ -12,18 +17,22 @@ const wrongGuesses = computed(() =>
   guessed.value.filter(l => !word.includes(l)).length
 )
 
-const displayWord = computed(() =>
-  word.split('').map(l => guessed.value.includes(l) ? l : '_').join(' ')
-)
+const displayWord = computed(() => {
+  if (won.value || lost.value) return word.split('').join(' ')
+  return word.split('').map(l => guessed.value.includes(l) ? l : '_').join(' ')
+})
 
-const won = computed(() => word.split('').every(l => guessed.value.includes(l)))
-const lost = computed(() => wrongGuesses.value >= maxWrong)
+const won = computed(() => word.split('').every(l => guessed.value.includes(l))  || puzzleStore.correctPuzzleIds.includes('1983'))
+const lost = computed(() => wrongGuesses.value >= maxWrong || puzzleStore.wrongPuzzleIds.includes('1983'))
 
 function guess(letter: string) {
   if (!guessed.value.includes(letter)) {
     guessed.value.push(letter)
   }
 }
+
+watch(won, (val) => { if (val) puzzleStore.completePuzzle('1983', true) })
+watch(lost, (val) => { if (val) puzzleStore.completePuzzle('1983', false) })
 
 function goToNextTimelineItem(){
   router.push("/timeline/1991")
@@ -40,7 +49,7 @@ function goToNextTimelineItem(){
 
     <p class="word">{{ displayWord }}</p>
 
-    <div v-if="!won && !lost" class="keyboard">
+    <div v-if="!won && !lost && !isCompleted" class="keyboard">
       <button
         v-for="letter in letters"
         :key="letter"
@@ -52,8 +61,8 @@ function goToNextTimelineItem(){
       </button>
     </div>
 
-    <p v-if="won" class="result win">🎉 Gewonnen! Het woord was {{ word }}!</p>
-    <p v-if="lost" class="result lose">💀 Verbinding verbroken... Het woord was {{ word }}.</p>
+    <p v-if="won" class="result win">Gewonnen! Het woord was {{ word }}!</p>
+    <p v-if="lost" class="result lose">Verbinding verbroken... Het woord was {{ word }}.</p>
     <button @click="goToNextTimelineItem" class="continue-button" v-if="won || lost">Doorgaan →</button>
   </div>
 </template>
@@ -149,18 +158,34 @@ function goToNextTimelineItem(){
 }
 
 .result {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   letter-spacing: 0.05em;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  line-height: 1.65;
+  padding: 16px 20px;
+  border-radius: 6px;
+  border: 1px solid;
+  border-left: 3px solid;
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
 }
 
 .win {
   color: #3dff3d;
   text-shadow: 0 0 10px #3dff3d88;
+  border-color: #2a5a2a;
+  border-left-color: #3dff3d;
+  background: #050d05;
+  box-shadow: 0 0 20px #3dff3d0d;
 }
 
 .lose {
-  color: #ff5555;
-  text-shadow: 0 0 10px #ff555588;
+  color: #ff7070;
+  text-shadow: 0 0 10px #ff555566;
+  border-color: #5a2a2a;
+  border-left-color: #ff5555;
+  background: #0d0505;
+  box-shadow: 0 0 20px #ff55550d;
 }
 </style>
