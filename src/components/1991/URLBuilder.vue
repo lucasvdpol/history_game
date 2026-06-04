@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { usePuzzleStore } from '@/stores/puzzle';
+import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter();
+const puzzleStore = usePuzzleStore();
 
 const parts = [ '/hypertext/WWW/', 'info.cern.ch','http://',  'TheProject.html']
 const correctOrder = ['http://', 'info.cern.ch', '/hypertext/WWW/', 'TheProject.html']
@@ -12,8 +14,12 @@ const guessed = ref<string[]>([])
 const maxWrong = 3;
 const wrongGuesses = ref(0)
 
-const won = computed(() => guessed.value.join('') === correctOrder.join(''))
-const lost = computed(() => wrongGuesses.value >= maxWrong)
+const won = computed(() => guessed.value.join('') === correctOrder.join('') || puzzleStore.correctPuzzleIds.includes('1991'))
+const lost = computed(() => wrongGuesses.value >= maxWrong || puzzleStore.wrongPuzzleIds.includes('1991'))
+
+watch(won, (val) => { if (val) puzzleStore.completePuzzle('1991', true)})
+watch(lost, (val) => { if (val) puzzleStore.completePuzzle('1991', false)})
+
 
 const showRetryButton = computed(() => guessed.value.length > 0)
 
@@ -48,8 +54,8 @@ function goToNextTimelineItem(){
 
     <div class="url-display">
       <span class="url-label">&gt; ADRES:</span>
-      <span class="url-value" :class="{ empty: guessed.length === 0 }">
-        {{ guessed.length > 0 ? guessed.join('') : '...' }}
+      <span class="url-value" :class="{ empty: !won && !lost && guessed.length === 0 }">
+        {{ won || lost ? correctOrder.join('') : guessed.length > 0 ? guessed.join('') : '...' }}
       </span>
       <span class="cursor">█</span>
     </div>
