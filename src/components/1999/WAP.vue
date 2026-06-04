@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { usePuzzleStore } from '@/stores/puzzle'
+
+const puzzleStore = usePuzzleStore()
 
 const puzzleItems = ref(["<card title='Nieuws'>", "<p>Klik hier</p>", "<a href='...'>", "<card title='Menu'>"])
 const correctOrder = ["<card title='Menu'>", "<card title='Nieuws'>", "<p>Klik hier</p>", "<a href='...'>"]
 const correct = computed(() => puzzleItems.value.join() === correctOrder.join())
 
 const drag = ref(false)
+const submitted = ref(false)
 
+function controleer() {
+  submitted.value = true
+  puzzleStore.completePuzzle('wap-1999', correct.value)
+}
+
+watch(correct, (val) => { if (val) puzzleStore.completePuzzle('1999', val) })
 </script>
 
 <template>
@@ -18,7 +28,9 @@ const drag = ref(false)
         <div class="code-block">{{ element }}</div>
       </template>
     </draggable>
-    <div v-if="correct" class="success">✓ Correct!</div>
+    <button v-if="!submitted" class="check-btn" @click="controleer">Controleer</button>
+    <div v-if="submitted && correct" class="success">✓ Correct!</div>
+    <div v-if="submitted && !correct" class="wrong">✗ Niet helemaal — probeer opnieuw</div>
   </div>
 </template>
 
@@ -56,9 +68,31 @@ const drag = ref(false)
   border-color: #888;
 }
 
+.check-btn {
+  margin-top: 8px;
+  padding: 8px 24px;
+  background: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.check-btn:hover {
+  background: #005fa3;
+}
+
 .success {
   margin-top: 12px;
   color: #4caf50;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.wrong {
+  margin-top: 12px;
+  color: #f44336;
   font-weight: bold;
   font-size: 18px;
 }
