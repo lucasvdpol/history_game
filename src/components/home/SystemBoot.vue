@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuth } from '../../composables/useAuth.ts'
+import { useAuthStore } from '../../stores/auth'
 import AccessForm from './AccessForm.vue'
 
 const router = useRouter()
-const { login } = useAuth()
+const auth = useAuthStore()
 const bootMessage = ref('Wachten op systeem toegang...')
 const isConnecting = ref(false)
 
@@ -14,7 +14,7 @@ function startSystem(name: string) {
   bootMessage.value = `Welkom, Operator ${name}. Verbinding maken met 1983...`
 
   setTimeout(() => {
-    login(name)
+    auth.login(name)
     router.push('/timeline/1983')
   }, 2000)
 }

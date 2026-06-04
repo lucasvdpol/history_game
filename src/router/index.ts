@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TimelineView from '../views/TimelineView.vue'
-import { useAuth } from '../composables/useAuth.ts'
+import { useAuthStore } from '../stores/auth'
 
 const routes = [
   {
@@ -24,8 +24,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const { isLoggedIn } = useAuth()
-  if (to.meta.requiresAuth && !isLoggedIn.value) {
+  const auth = useAuthStore()
+  if (to.meta.requiresAuth && !auth.isLoggedIn) {
     return { name: 'home' }
   }
 })
