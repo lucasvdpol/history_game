@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import TimelineNav from './views/TimelineNav.vue'
-import { useAuth } from './composables/useAuth.ts'
+import { useAuthStore } from './stores/auth'
 
-const { isLoggedIn } = useAuth()
+const auth = useAuthStore()
 </script>
 
 <template>
-  <header v-if="isLoggedIn">
+  <header v-if="auth.isLoggedIn">
     <TimelineNav />
   </header>
   <main>
