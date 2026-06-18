@@ -49,7 +49,7 @@ function goToNextTimelineItem(){
 
 <template>
   <div class="urlbuilder">
-    <p class="intro">🌐 Het is 1991. Bouw de eerste URL naar het world wide web!</p>
+    <p class="intro">Het is 1991. Bouw de eerste URL naar het world wide web!</p>
     <p class="counter">Foute pogingen: <span :class="{ danger: wrongGuesses >= maxWrong - 1 }">{{ wrongGuesses }}</span> / {{ maxWrong }}</p>
 
     <div class="url-display">

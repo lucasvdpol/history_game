@@ -77,7 +77,7 @@ function goToNextTimelineItem() {
 
 <template>
   <div class="iphonequiz">
-    <p class="intro">📱 Het is 2007. Test jouw kennis over de iPhone!</p>
+    <p class="intro">Het is 2007. Test jouw kennis over de iPhone!</p>
 
     <div v-if="!isFinished && !isCompleted" class="quiz-container">
       <div class="progress-bar">

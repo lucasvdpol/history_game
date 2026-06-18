@@ -44,7 +44,7 @@ function goToNextTimelineItem(){
 
 <template>
   <div class="wordguess">
-    <p class="intro">🖥️ Het jaar is 1983. Raad het geheime woord!</p>
+    <p class="intro">Het jaar is 1983. Raad het geheime woord!</p>
     <p class="counter">Foute gokken: <span :class="{ danger: wrongGuesses >= maxWrong - 1 }">{{ wrongGuesses }}</span> / {{ maxWrong }}</p>
 
     <p class="word">{{ displayWord }}</p>
