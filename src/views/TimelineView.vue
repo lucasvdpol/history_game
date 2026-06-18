@@ -8,6 +8,7 @@ import WordGuess from '@/components/1983/WordGuess.vue'
 import { timelineItems } from '@/data/timelineItems'
 import URLBuilder from '@/components/1991/URLBuilder.vue'
 import iPhoneQuiz from '@/components/2007/iPhoneQuiz.vue'
+import SlidePuzzleComponent from '@/components/2020/SlidePuzzleComponent.vue'
 const route = useRoute()
 
 const currentYear = computed(() => route.params.id)
@@ -30,6 +31,7 @@ const currentItem = computed(() => timelineItems.find(item => item.id === curren
     <URLBuilder v-if="currentYear === '1991'" />
     <WAP v-if="currentYear === '1999'"/>
     <iPhoneQuiz v-if="currentYear === '2007'"/>
+    <SlidePuzzleComponent v-if="currentYear === '2020'"/>
   </main>
 </template>
 
