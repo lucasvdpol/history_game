@@ -21,5 +21,11 @@ export const usePuzzleStore = defineStore('puzzle', () => {
     }
   }
 
-  return { correctPuzzleIds, wrongPuzzleIds, completedPuzzles, totalPuzzles, currentPuzzle, completePuzzle }
+  function resetGame() {
+    correctPuzzleIds.value = []
+    wrongPuzzleIds.value = []
+    completedPuzzles.value = []
+  }
+
+  return { correctPuzzleIds, wrongPuzzleIds, completedPuzzles, totalPuzzles, currentPuzzle, completePuzzle, resetGame }
 })

@@ -7,7 +7,7 @@ import SystemBoot from '../components/home/SystemBoot.vue'
   <main class="home-screen">
     <section class="intro-section">
       <div class="intro-card">
-        <span class="intro-tag">📡 Tijdreis: 1983 – 2007</span>
+        <span class="intro-tag">Tijdreis: 1983 – 2007</span>
         <h2 class="intro-title">Van nul naar altijd online</h2>
         <p class="intro-text">
           Stel je voor: geen YouTube, geen WhatsApp, geen Google Maps. Zo was het vroeger!
@@ -134,9 +134,11 @@ import SystemBoot from '../components/home/SystemBoot.vue'
   border-radius: 10px;
   padding: 20px 16px 24px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
   transition: border-color 0.2s, transform 0.2s;
   cursor: default;
-  height: 280px
+  height: 160px;
 }
 
 .fact-card:hover {
@@ -145,6 +147,7 @@ import SystemBoot from '../components/home/SystemBoot.vue'
 }
 
 .fact-icon {
+  display: none;
   font-size: 2rem;
   margin-bottom: 8px;
 }
