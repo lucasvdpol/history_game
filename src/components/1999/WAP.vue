@@ -37,7 +37,7 @@ function goToNextTimelineItem() {
 
 <template>
   <div class="wap">
-    <p class="intro">📱 Het jaar is 1999. Bouw een geldige WAP-pagina!</p>
+    <p class="intro">Het jaar is 1999. Bouw een geldige WAP-pagina!</p>
     <p class="counter">Foute pogingen: <span :class="{ danger: attempts >= maxAttempts - 1 }">{{ attempts }}</span> / {{ maxAttempts }}</p>
 
     <div v-if="!won && !lost" class="blocks">

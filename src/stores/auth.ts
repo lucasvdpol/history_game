@@ -10,5 +10,10 @@ export const useAuthStore = defineStore('auth', () => {
     isLoggedIn.value = true
   }
 
-  return { isLoggedIn, operatorName, login }
+  function logout() {
+    operatorName.value = ''
+    isLoggedIn.value = false;
+  }
+
+  return { isLoggedIn, operatorName, login, logout }
 })

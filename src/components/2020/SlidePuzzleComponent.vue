@@ -51,7 +51,7 @@ function handleDragEnd() {
 }
 
 function goToNextTimelineItem() {
-  router.push('/')
+  router.push('/result')
 }
 </script>
 

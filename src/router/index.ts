@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TimelineView from '../views/TimelineView.vue'
+import ResultView from '../views/ResultView.vue'
 import { useAuthStore } from '../stores/auth'
 
 const routes = [
@@ -14,6 +15,12 @@ const routes = [
     name: 'timeline',
     component: TimelineView,
     props: true,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/result',
+    name: 'result',
+    component: ResultView,
     meta: { requiresAuth: true }
   }
 ]

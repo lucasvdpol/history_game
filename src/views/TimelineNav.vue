@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import { timelineItems } from '@/data/timelineItems'
+import { usePuzzleStore } from '@/stores/puzzle'
+
+const puzzleStore = usePuzzleStore()
 </script>
 
 <template>
   <nav class="tech-timeline">
     <div class="connection-line"></div>
 
-    <router-link 
-      v-for="item in timelineItems" 
-      :key="item.id" 
-      :to="`/timeline/${item.id}`" 
+    <router-link
+      v-for="item in timelineItems"
+      :key="item.id"
+      :to="`/timeline/${item.id}`"
       class="timeline-node"
     >
       <span class="digital-year">{{ item.year }}</span>
-      <span class="puls-circle"></span>
+      <span class="puls-circle" :class="{ completed: puzzleStore.completedPuzzles.includes(item.id) }"></span>
       <span class="node-title">{{ item.title }}</span>
     </router-link>
   </nav>
@@ -84,6 +87,11 @@ import { timelineItems } from '@/data/timelineItems'
   color: var(--text-muted);
   font-weight: 500;
   transition: color 0.3s ease;
+}
+
+.puls-circle.completed {
+  background-color: var(--tech-blue);
+  box-shadow: 0 0 0 4px var(--bg-color), 0 0 15px var(--tech-glow);
 }
 
 .router-link-active .puls-circle {
