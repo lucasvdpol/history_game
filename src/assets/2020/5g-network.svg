@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <rect x="0" y="0" width="300" height="300" fill="#0a0a0f" />
+
+  <!-- signal waves from tower -->
+  <g stroke="#3dff3d" fill="none" stroke-width="3" opacity="0.55">
+    <path d="M 60 110 A 90 90 0 0 1 240 110" />
+    <path d="M 80 90 A 65 65 0 0 1 220 90" />
+    <path d="M 100 70 A 40 40 0 0 1 200 70" />
+  </g>
+
+  <!-- cell tower -->
+  <g fill="#3dff3d">
+    <polygon points="150,40 135,150 165,150" fill="none" stroke="#3dff3d" stroke-width="3" />
+    <rect x="140" y="150" width="20" height="10" />
+    <rect x="120" y="60" width="60" height="6" />
+    <rect x="128" y="85" width="44" height="5" />
+  </g>
+
+  <!-- ground line -->
+  <rect x="0" y="160" width="300" height="2" fill="#2a5a2a" />
+
+  <!-- smartphone with 5G label -->
+  <g>
+    <rect x="120" y="185" width="60" height="100" rx="8" fill="#0d1a0d" stroke="#3dff3d" stroke-width="3" />
+    <rect x="128" y="196" width="44" height="62" fill="#050d05" stroke="#2a5a2a" stroke-width="1" />
+    <text x="150" y="234" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#3dff3d">5G</text>
+    <circle cx="150" cy="272" r="4" fill="#3dff3d" />
+  </g>
+
+  <!-- connected car (left) -->
+  <g stroke="#7fff7f" stroke-width="2" fill="none">
+    <rect x="20" y="245" width="46" height="20" rx="6" />
+    <circle cx="32" cy="267" r="6" fill="#0a0a0f" />
+    <circle cx="56" cy="267" r="6" fill="#0a0a0f" />
+    <path d="M 66 235 L 86 215" stroke-dasharray="4 4" />
+  </g>
+
+  <!-- connected robot (right) -->
+  <g stroke="#7fff7f" stroke-width="2" fill="none">
+    <rect x="234" y="230" width="34" height="30" rx="4" />
+    <circle cx="244" cy="243" r="3" fill="#7fff7f" />
+    <circle cx="258" cy="243" r="3" fill="#7fff7f" />
+    <rect x="244" y="260" width="14" height="14" />
+    <path d="M 230 220 L 214 200" stroke-dasharray="4 4" />
+  </g>
+</svg>
